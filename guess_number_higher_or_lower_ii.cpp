@@ -5,12 +5,12 @@ public:
         for (int len = 2; len <= n; ++len) {
             for (int i = 1; i + len - 1 <= n; ++i) {
                 int j = i + len - 1;
-                int minCost = INT_MAX;
+                int min_cost = INT_MAX;
                 for (int k = i; k <= j; ++k) {
                     int cost = k + max(dp[i][k-1], dp[k+1][j]);
-                    minCost = min(cost, minCost);
+                    min_cost = min(cost, min_cost);
                 }
-                dp[i][j] = minCost;
+                dp[i][j] = min_cost;
             }
         }
         return dp[1][n];
