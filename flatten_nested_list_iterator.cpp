@@ -3,60 +3,49 @@
  * // You should not implement it, or speculate about its implementation
  * class NestedInteger {
  *   public:
- *     // Return true if this NestedInteger holds a single integer,
- *     // rather than a nested list.
+ *     // Return true if this NestedInteger holds a single integer, rather than a nested list.
  *     bool isInteger() const;
  *
- *     // Return the single integer that this NestedInteger holds,
- *     // if it holds a single integer
+ *     // Return the single integer that this NestedInteger holds, if it holds a single integer
  *     // The result is undefined if this NestedInteger holds a nested list
  *     int getInteger() const;
  *
- *     // Return the nested list that this NestedInteger holds,
- *     // if it holds a nested list
+ *     // Return the nested list that this NestedInteger holds, if it holds a nested list
  *     // The result is undefined if this NestedInteger holds a single integer
  *     const vector<NestedInteger> &getList() const;
  * };
  */
 class NestedIterator {
-private:
-    stack<NestedInteger> nodes;
-    
 public:
     NestedIterator(vector<NestedInteger> &nestedList) {
-        int size = nestedList.size();
-        for(int i = size - 1; i >= 0; --i) {
-            nodes.push(nestedList[i]);
-        }
+        helper(nestedList);
     }
 
     int next() {
-        int result = nodes.top().getInteger();
-        nodes.pop();
-        return result;
+        int element = q.front();
+        q.pop();
+        return element;
     }
-    
+
     bool hasNext() {
-        while(!nodes.empty()) {
-            NestedInteger curr = nodes.top();
-            if(curr.isInteger()) {
-                return true;
-            }
-            
-            nodes.pop();
-            auto adjs = curr.getList();
-            int size = adjs.size();
-            for(int i = size - 1; i >= 0; --i) {
-                nodes.push(adjs[i]);
+        return !q.empty();
+    }
+
+private:
+    void helper(vector<NestedInteger>& nestedList) {
+        for (auto nestedInteger : nestedList) {
+            if (nestedInteger.isInteger()) {
+                q.push(nestedInteger.getInteger());
+            } else {
+                helper(nestedInteger.getList());
             }
         }
-        
-        return false;
     }
+    queue<int> q;
 };
 
 /**
  * Your NestedIterator object will be instantiated and called as such:
  * NestedIterator i(nestedList);
- * while (i.hasNext()) v.push_back(i.next());
+ * while (i.hasNext()) cout << i.next();
  */
