@@ -5,10 +5,9 @@ public:
         
         string result = "";
         int count = 0;
-        while (num && count < 8)
-        {
+        while (num && count < 8) {
             int temp = num & 15;
-            if (temp<10) result.push_back('0'+ temp);
+            if (temp < 10) result.push_back('0'+ temp);
             else result.push_back('a'+temp-10);
             
             num >>= 4;
