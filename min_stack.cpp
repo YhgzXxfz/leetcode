@@ -1,7 +1,4 @@
 class MinStack {
-private:
-    stack<int> data;
-    stack<int> minStack;
 public:
     void push(int x) {
         data.push(x);
@@ -9,19 +6,23 @@ public:
     }
 
     void pop() {
-        if (data.empty() || minStack.empty()) return;
+        if (data.empty()) return;
         int x = data.top();
         data.pop();
         if (x == minStack.top()) minStack.pop();
     }
 
     int top() {
-        if (data.empty() || minStack.empty()) return 0;
+        if (data.empty()) return 0;
         return data.top();
     }
 
     int getMin() {
-        if (data.empty() || minStack.empty()) return 0;
+        if (minStack.empty()) return 0;
         return minStack.top();
     }
+    
+private:
+    stack<int> data;
+    stack<int> minStack;
 };
