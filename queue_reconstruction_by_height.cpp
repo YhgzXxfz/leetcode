@@ -1,21 +1,18 @@
 class Solution {
 public:
     vector<pair<int, int>> reconstructQueue(vector<pair<int, int>>& people) {
-        int len = people.size();
         vector<pair<int, int>> result;
-        if (len == 0) return result;
+        if (people.empty()) return result;
         
+	auto comp = [&](pair<int,int> a, pair<int,int> b) {
+		return a.first == b.first ? a.second < b.second : a.first > b.first;
+	};
         sort(people.begin(), people.end(), comp);
         
-        for (int i = 0; i < len; ++i) {
+        for (int i = 0; i < people.size(); ++i) {
             result.insert(result.begin()+people[i].second, people[i]);
         }
         return result;
     }
 
-private:
-    static bool comp(pair<int, int> & a, pair<int, int> & b) {
-        if (a.first == b.first) return a.second < b.second;
-        return a.first > b.first;
-    }
 };
