@@ -1,24 +1,18 @@
 class Solution {
 public:
     int findNthDigit(int n) {
-        long base = 9, digits = 1;
-        while (n > digits*base) {
-            n -= digits*base;
-            base *= 10;
-            digits++;
+        long count = 9;
+        int len = 1, start_number = 1;
+        
+        while (n > len*count) {
+            n -= len*count;
+            len++;
+            count *= 10;
+            start_number *= 10;
         }
         
-        long index = n%digits;
-        if (index == 0) index = digits;
-        long num = 1;
-        for (int i = 1; i < digits; ++i) {
-            num *= 10;
-        }
-        num += (index == digits) ? n/digits -1: n/digits;
-        
-        for (int i = index; i < digits; ++i) {
-            num /= 10;
-        }
-        return num % 10;
+        start_number += (n-1)/len;
+        string s = to_string(start_number);
+        return s[(n-1)%len]-'0';
     }
 };
