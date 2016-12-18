@@ -1,19 +1,19 @@
 class Solution {
 public:
     int strobogrammaticInRange(string low, string high) {
-        vector<int> count = {0};
+        int count = 0;
         for (int len = low.size(); len <= high.size(); ++len) {
             string c(len, '\0');
             dfs(low, high, c, count, 0, len-1);
         }
-        return count[0];
+        return count;
     }
     
 private:
-    void dfs(string low, string high, string c, vector<int>& count, int left, int right) {
+    void dfs(string low, string high, string c, int& count, int left, int right) {
         if (left > right) {
             if (c.size() == low.size() && c<low || c.size() == high.size() && c > high) return;
-            count[0]++;
+            count++;
             return;
         }
         for (auto& p : pairs) {
