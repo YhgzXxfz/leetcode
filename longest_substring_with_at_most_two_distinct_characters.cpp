@@ -1,26 +1,20 @@
 class Solution {
 public:
     int lengthOfLongestSubstringTwoDistinct(string s) {
-        int len = s.size();
-        if (len < 1) return 0;
-        
-        unordered_map<char, int> mp;
-        int left = 0, right = 0, max_length = 0;
-        while (right < len) {
-            if (mp.size() <= 2) {
-                mp[s[right]] = right;
-                right++;
+        int count[256] = {0}; // initialization is necessary for counting distinct numbers
+        int begin = 0, distinct = 0, max_len = 0;
+        for (int i = 0; i < s.size(); ++i) {
+            if (count[s[i]] == 0) distinct++;
+            count[s[i]]++;
+            
+            while (distinct > 2) {
+                count[s[begin]]--;
+                if (count[s[begin]] == 0) distinct--;
+                begin++;
             }
-            if (mp.size() > 2) {
-                int left_most = len;
-                for (auto& entry : mp) {
-                    left_most = min(left_most, entry.second);
-                }
-                mp.erase(s[left_most]);
-                left = left_most+1;
-            }
-            max_length = max(max_length, right-left);
+            
+            max_len = max(max_len, i-begin+1);
         }
-        return max_length;
+        return max_len;
     }
 };
