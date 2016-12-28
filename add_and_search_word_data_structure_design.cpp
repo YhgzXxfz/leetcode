@@ -23,16 +23,16 @@ public:
     // Returns if the word is in the data structure. A word could
     // contain the dot character '.' to represent any one letter.
     bool search(string word) {
-        return SearchWord(word, root, 0);
+        return searchWord(word, root, 0);
     }
     
-    bool SearchWord(string word, TrieNode* node, int s) {
+    bool searchWord(string word, TrieNode* node, int s) {
         if (s == word.size()) return node->is_string;
         
-        if (node->leaves.count(word[s])) return SearchWord(word, node->leaves[word[s]], s+1);
+        if (node->leaves.count(word[s])) return searchWord(word, node->leaves[word[s]], s+1);
         else if (word[s] == '.') {
             for (auto i : node->leaves) {
-                if (SearchWord(word, i.second, s+1)) return true;
+                if (searchWord(word, i.second, s+1)) return true;
             }
         }
         return false;
