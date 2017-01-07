@@ -1,13 +1,15 @@
 class Solution {
 public:
     int numWays(int n, int k) {
-        if (n < 2 || !k) return n * k;
-        int s = k, d1 = k, d2 = k * (k - 1);
-        for (int i = 2; i < n; i++) {
-            s = d2;
-            d2 = (k - 1) * (d1 + d2);
-            d1 = s;
-        }
-        return s + d2;
+	if (n == 0) return 0;
+	if (n == 1) return k;
+
+	int same = k, diff = k*(k-1);
+	for (int i = 2; i < n; ++i) {
+		int temp = diff;
+		diff = (k-1)*(same+diff);
+		same = temp*1;
+	}
+	return same+diff;
     }
 };
