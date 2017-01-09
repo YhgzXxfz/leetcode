@@ -1,49 +1,24 @@
 class Solution {
 public:
     int compareVersion(string version1, string version2) {
-        string rest1 = version1;
-        string rest2 = version2;
-        int ps1, ps2;
-        
-        while (true) {
-            if (rest1 == "" && rest2 == "") break;
+        int len1 = version1.size(), len2 = version2.size();
+        int i = 0, j = 0, num1 = 0, num2 = 0;
+        while (i < len1 || j < len2) {
+            while (i < len1 && version1[i] != '.') {
+                num1 = num1*10 + version1[i]-'0';
+                ++i;
+            }
+            while (j < len2 && version2[j] != '.') {
+                num2 = num2*10 + version2[j]-'0';
+                ++j;
+            }
             
-            int v1 = stringToInteger(rest1);
-            int v2 = stringToInteger(rest2);
+            if (num1 > num2) return 1;
+            else if (num1 < num2) return -1;
             
-            if (v1 > v2) return 1;
-            else if (v1 < v2) return -1;
-            
-            ps1 = pointPosition(rest1);
-            rest1 = rest1.substr(ps1+1, rest1.size()-ps1-1);
-            ps2 = pointPosition(rest2);
-            rest2 = rest2.substr(ps2+1, rest2.size()-ps2-1);
+            num1 = num2 = 0;
+            ++i; ++j;
         }
         return 0;
-    }
-    
-    int stringToInteger(string str) {
-        const char * s = str.c_str();
-        int result = 0;
-        while (*s != '\0') {
-            if (*s == '.') break;
-            
-            result = result * 10 + (*s - '0');
-            ++s;
-        }
-        return result;
-    }
-    
-    int pointPosition(string str) {
-        const char * s = str.c_str();
-        int count = 0;
-        while (*s != '\0') {
-            if (*s == '.') break;
-            
-            ++count;
-            ++s;
-        }
-        if (*s == '\0') count = str.length()-1;
-        return count;
     }
 };
