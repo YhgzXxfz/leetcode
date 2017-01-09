@@ -14,7 +14,7 @@ public:
         if (mp.find("") != mp.end()) {
             for (int i = 0; i < len; ++i) {
                 if (words[i] == "") continue;
-                if (IsPalindrome(words[i])) result.push_back({mp[""], i});
+                if (isPalindrome(words[i])) result.push_back({mp[""], i});
             }
         }
         
@@ -23,16 +23,16 @@ public:
             for (int j = 0; j < word.size(); ++j) {
                 string left = word.substr(0, j), right = word.substr(j);
                 
-                if (mp.find(left) != mp.end() && mp[left] != i && IsPalindrome(right)) result.push_back({i, mp[left]});
+                if (mp.find(left) != mp.end() && mp[left] != i && isPalindrome(right)) result.push_back({i, mp[left]});
                 
-                if (mp.find(right) != mp.end() && mp[right] != i && IsPalindrome(left)) result.push_back({mp[right], i});
+                if (mp.find(right) != mp.end() && mp[right] != i && isPalindrome(left)) result.push_back({mp[right], i});
             }
         }
         return result;
     }
 
 private:
-    bool IsPalindrome(string str) {
+    bool isPalindrome(string str) {
         int l = 0, r = str.size()-1;
         while (l < r) {
             if (str[l++] != str[r--]) return false;
