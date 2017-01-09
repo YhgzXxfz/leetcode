@@ -1,7 +1,7 @@
 class Solution {
 public:
     int myAtoi(string str) {
-        const char * s = str.c_str();
+        const char* s = str.c_str();
         bool minus = false; 
 
         while (' ' == *s) ++s;
