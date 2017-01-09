@@ -9,7 +9,7 @@ public:
             if (left >= right) break;
             
             while (right > left && !vowels.count(s[right])) right--;
-            if (left >= right) break;
+            if (right <= left) break;
             
             swap(s[left], s[right]);
             left++; right--;
