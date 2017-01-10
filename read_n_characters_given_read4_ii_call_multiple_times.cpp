@@ -10,9 +10,14 @@ public:
      */
     int read(char *buf, int n) {
         int i = 0;
-        while (i < n && (i4 < n4 || (i4 = 0) < (n4 = read4(buf4))))
-            buf[i++] = buf4[i4++];
-        return i;
+        while (i < n) {
+		if (i4 == 0) n4 = read4(buf4);
+		if (n4 == 0) break;
+
+		while (i < n && i4 < n4) buf[i++] = buf4[i4++];
+		if (i4 >= n4) i4 = 0; 
+	}
+	return i;
     }
 
 private:
