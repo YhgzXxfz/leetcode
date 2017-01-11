@@ -6,9 +6,10 @@ public:
         string result = "1";
         while (--n) {
             string curr = "";
-            for (int i = 0; i < result.size(); i++) {
+            int len = result.size();
+            for (int i = 0; i < len; i++) {
                 int count = 1;
-                 while ((i+1 < result.size()) && (result[i] == result[i+1])){
+                 while (i < len-1 && result[i] == result[i+1]){
                     count++;    
                     i++;
                 }
