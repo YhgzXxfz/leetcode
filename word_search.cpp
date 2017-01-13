@@ -11,7 +11,8 @@ public:
         }
         return false;
     }
-    
+
+private:    
     bool dfs(vector<vector<char>>& board, const string word, int x, int y, int index) {
         if (word.size() == index) return true;
         
