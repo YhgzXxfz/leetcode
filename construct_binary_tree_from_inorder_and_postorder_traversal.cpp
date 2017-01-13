@@ -17,7 +17,8 @@ public:
         
         return dfs(mp, postorder, 0, inorder.size()-1, 0, postorder.size()-1);
     }
-    
+
+private:    
     TreeNode* dfs(unordered_map<int, int>& mp, vector<int>& postorder, int li, int ri, int lp, int rp) {
         if (lp > rp) return nullptr;
         if (lp == rp) return new TreeNode(postorder[lp]);
