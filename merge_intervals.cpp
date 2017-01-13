@@ -13,7 +13,7 @@ public:
         vector<Interval> result;
         if (intervals.empty()) return result;
         
-        sort(intervals.begin(), intervals.end(), [](Interval& a, Interval& b){return a.start < b.start;});
+        sort(intervals.begin(), intervals.end(), [&](Interval a, Interval b){ return a.start < b.start; });
         
         int len = intervals.size();
         auto curr = intervals[0];
@@ -21,11 +21,11 @@ public:
             if (curr.end >= intervals[i].start) {
                 curr.end = max(curr.end, intervals[i].end);
             } else {
-                result.push_back(curr);
+                result.emplace_back(curr);
                 curr = intervals[i];
             }
         }
-        result.push_back(curr);
+        result.emplace_back(curr);
         return result;
     }
 };
