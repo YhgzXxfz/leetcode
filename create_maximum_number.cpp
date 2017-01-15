@@ -13,14 +13,10 @@ public:
 private:
     vector<int> merge(vector<int> nums1, vector<int> nums2, int k) {
         vector<int> result (k, 0);
-        for (int i = 0, j = 0, r = 0; r < k; ++r) {
-            if (greater(nums1, i, nums2, j)) {
-                result[r] = nums1[i];
-                ++i;
-            } else {
-                result[r] = nums2[j];
-                ++j;
-            }
+        int i = 0, j = 0;
+        for (int r = 0; r < k; ++r) {
+            if (greater(nums1, i, nums2, j)) result[r] = nums1[i++];
+            else result[r] = nums2[j++];
         }
         return result;
     }
@@ -34,14 +30,11 @@ private:
     }
     
     vector<int> maxArray(vector<int> nums, int k) {
-        int len = nums.size();
+        int len = nums.size(), left = 0;
         vector<int> result (k, 0);
-        for (int i = 0, j = 0; i < len; ++i) {
-            while (len-i +j > k && j > 0 && result[j-1] < nums[i]) --j;
-            if (j < k) {
-                result[j] = nums[i];
-                ++j;
-            }
+        for (int i = 0; i < len; ++i) {
+            while (len-i +left > k && left > 0 && result[left-1] < nums[i]) --left;
+            if (left < k) result[left++] = nums[i];
         }
         return result;
     }
