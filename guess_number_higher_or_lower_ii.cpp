@@ -1,18 +1,22 @@
 class Solution {
 public:
     int getMoneyAmount(int n) {
-        vector<vector<int>> dp(n + 2, vector<int>(n + 1, 0));
-        for (int len = 2; len <= n; ++len) {
-            for (int i = 1; i + len - 1 <= n; ++i) {
-                int j = i + len - 1;
-                int min_cost = INT_MAX;
-                for (int k = i; k <= j; ++k) {
-                    int cost = k + max(dp[i][k-1], dp[k+1][j]);
-                    min_cost = min(cost, min_cost);
-                }
-                dp[i][j] = min_cost;
-            }
+        vector<vector<int>> cache(n+1, vector<int>(n+1));
+        return dfs(cache, 1, n);
+    }
+    
+private:
+    int dfs(vector<vector<int>>& cache, int begin, int end) {
+        if (begin >= end) return 0;
+        if (cache[begin][end]) return cache[begin][end];
+        
+        int cost = INT_MAX;
+        // min-max: minimize the maximum loss
+        for (int x = begin; x <= end; ++x) {
+            int temp = x + max(dfs(cache, begin, x-1), dfs(cache, x+1, end));
+            cost = min(cost, temp);
         }
-        return dp[1][n];
+        cache[begin][end] = cost;
+        return cost;
     }
 };
