@@ -4,34 +4,28 @@ public:
         vector<string> result;
         if (num.empty()) return result;
         
-        string solution;
-        for (int i = 1; i <= num.size(); ++i) {
-            string s = num.substr(0,i);
-            long curr = stol(s);
-            if (to_string(curr).size() != s.size()) continue;
-            
-            dfs(result, s, i, curr, curr, '#', num, target);
-        }
-        
+        dfs(num, target, "", result, 0, 0, 0);
         return result;
     }
-    
-    void dfs(vector<string>& result, string solution, int pos, long curr, long prev, 
-        char op, const string& num, const int target) {
-        if (pos == num.size() && curr == target) {
-            result.push_back(solution);
+
+private:
+    void dfs(string num, int target, string solution, vector<string>& result, int start, long eval, long multed) {
+        if (start == num.size()) {
+            if (target == eval) result.emplace_back(solution);
             return;
         }
         
-        for (int i = pos+1; i <= num.size(); ++i) {
-            string s = num.substr(pos, i-pos);
-            long now = stol(s);
-            if (to_string(now).size() != s.size()) continue;
+        for (int i = start; i < num.size(); ++i) {
+            if (i != start && num[start] == '0') break;
             
-            dfs(result, solution+'+'+s, i, curr+now, now, '+', num, target);
-            dfs(result, solution+'-'+s, i, curr-now, now, '-', num, target);
-            dfs(result, solution+'*'+s, i, 
-                (op == '-') ? curr+prev-prev*now : ((op == '+') ? curr-prev+prev*now : prev*now), prev*now, op, num, target);
+            string curr_str = num.substr(start, i+1-start);
+            long curr = stol(curr_str);
+            if (start == 0) dfs(num, target, solution+curr_str, result, i+1, curr, curr);
+            else {
+                dfs(num, target, solution+"+"+curr_str, result, i+1, eval+curr, curr);
+                dfs(num, target, solution+"-"+curr_str, result, i+1, eval-curr, -curr);
+                dfs(num, target, solution+"*"+curr_str, result, i+1, eval-multed+multed*curr, multed*curr);
+            }
         }
     }
 };
