@@ -1,22 +1,21 @@
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        if ((nums1.size() + nums2.size())%2 == 1)
-            return findKthInTwoSortedArrays(nums1,nums2, (nums1.size()+nums2.size())/2 +1);
+        int m = nums1.size(), n = nums2.size();
+	if ((m+n) &1)
+            return getKth(nums1,nums2, (m+n)/2 +1);
         else
-            return (findKthInTwoSortedArrays(nums1,nums2, (nums1.size()+nums2.size())/2)
-                + findKthInTwoSortedArrays(nums1,nums2, (nums1.size()+nums2.size())/2 +1)) / 2.0;
+            return (getKth(nums1,nums2, (m+n)/2) + getKth(nums1,nums2, (m+n)/2 +1)) / 2.0;
     }
     
-    int findKthInTwoSortedArrays
-        (const vector<int>& A, const vector<int>& B, int k) {
+private:
+    int getKth(const vector<int>& A, const vector<int>& B, int k) {
         int m = A.size(), n = B.size();
 
         // Make sure m is the smaller one.
-        if (m > n) return findKthInTwoSortedArrays(B, A, k);
+        if (m > n) return getKth(B, A, k);
 
-        int left = 0;
-        int right = m;
+        int left = 0, right = m;
         // Find a partition of A and B
         // where min left s.t. A[left] >= B[k-1 - left]. Thus left is the (k+1)-th element.
         while (left < right) {
