@@ -11,22 +11,23 @@ public:
         }
         return counts;
     }
-    
-    int findIndex(int num, vector<int> sorted) {
+   
+private: 
+    int findIndex(int num, vector<int>& sorted) {
         int len = sorted.size();
         if (len == 0) return 0;
         
-        int start = 0, end = len-1;
-        if (num > sorted[end]) return end+1;
-        if (num <= sorted[start]) return 0;
+        int left = 0, right = len-1;
+        if (num > sorted[right]) return right+1;
+        if (num <= sorted[left]) return 0;
         
-        while (start +1 < end) {
-            int mid = start + (end-start)/2;
+        while (left +1 < right) {
+            int mid = left + (right-left)/2;
             
-            if (num > sorted[mid]) start = mid+1;
-            else end = mid;
+            if (num > sorted[mid]) left = mid+1;
+            else right = mid;
         }
-        if (num <= sorted[start]) return start;
-        return end;
+        if (num <= sorted[left]) return left;
+        return right;
     }
 };
