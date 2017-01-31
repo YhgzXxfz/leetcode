@@ -4,9 +4,7 @@ public:
         sort(nums.begin(), nums.end());
         int len = nums.size();
 
-        vector<int> T(len, 0);
-        vector<int> parent(len, 0);
-
+        vector<int> T(len, 0), parent(len, 0);
         int m = 0, mi = 0;
 
         for(int i = len - 1; i >= 0; --i) {
@@ -25,7 +23,7 @@ public:
 
         vector<int> result;
         for(int i = 0; i < m; ++i) {
-            result.push_back(nums[mi]);
+            result.emplace_back(nums[mi]);
             mi = parent[mi];
         }
 
