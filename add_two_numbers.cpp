@@ -11,7 +11,8 @@ public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         return addTwoLists(l1, l2, 0);
     }
-    
+
+private:    
     ListNode* addTwoLists(ListNode* l1, ListNode* l2, int carry) {
         if (!l1) return addOneList(l2, carry);
         if (!l2) return addOneList(l1, carry);
