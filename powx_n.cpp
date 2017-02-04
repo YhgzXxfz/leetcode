@@ -11,6 +11,7 @@ public:
         if (n&1) result *= x;
         if (result > INT_MAX || result < INT_MIN) return 0;
         
-        return sign == 1 ? result : 1/result;
+	// sign == -1 && result == 0 => overflow in recursion, so return 0
+        return sign == 1 ? result : result == 0 : 0 : 1/result;
     }
 };
