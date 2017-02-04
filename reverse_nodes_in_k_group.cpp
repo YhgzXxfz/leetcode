@@ -29,7 +29,8 @@ public:
         }
         return fakeHead.next;
     }
-    
+
+private:    
     ListNode* reverse(ListNode* begin, ListNode* end) {
         if (!begin || begin == end || begin->next == end) return begin;
         
