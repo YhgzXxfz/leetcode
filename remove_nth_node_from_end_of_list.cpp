@@ -6,6 +6,30 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+// one pass
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+    	if (!head || n == 0) return head;
+
+	auto slow = head, fast = head;
+	for (int i = 0; i < n; ++i) {
+		if (!fast) return head; // n > length, so remove none
+		fast = fast->next;
+	}
+	if (!fast) return head->next; // n == length, so remove head
+
+	while (fast->next) {
+		slow = slow->next;
+		fast = fast->next;
+	}
+	slow->next = slow->next->next;
+	return head;
+    }
+};
+
+
+// two pass
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
