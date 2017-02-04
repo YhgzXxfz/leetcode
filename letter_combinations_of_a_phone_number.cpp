@@ -10,17 +10,18 @@ public:
         dfs(digits, 0, tables, combination, results);
         return results;
     }
-    
-    void dfs(string digits, int levels, vector<string>& tables, string combination,vector<string>& results) {
-        if (levels == digits.size()) {
+
+private:    
+    void dfs(string digits, int start, vector<string>& tables, string combination,vector<string>& results) {
+        if (start == digits.size()) {
             results.emplace_back(combination);
             return;
         }
         
-        int curr = digits[levels]-'0';
+        int curr = digits[start]-'0';
         for (int i = 0; i < tables[curr].size(); ++i) {
             combination.push_back(tables[curr][i]);
-            dfs(digits, levels+1, tables, combination, results);
+            dfs(digits, start+1, tables, combination, results);
             combination.pop_back();
         }
     }
