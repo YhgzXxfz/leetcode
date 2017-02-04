@@ -11,16 +11,17 @@ public:
     ListNode* swapPairs(ListNode* head) {
         if (!head || !head->next) return head;
         
-        ListNode fakeHead(0);
+        ListNode fakeHead(0), *curr = &fakeHead;
         fakeHead.next = head;
-        auto curr = &fakeHead;
-        while (curr && curr->next && curr->next->next) {
+        
+	while (curr && curr->next && curr->next->next) {
             curr->next = swap(curr->next);
             curr = curr->next->next;
         }
         return fakeHead.next;
     }
-    
+
+private:    
     ListNode* swap(ListNode* node) {
         if (!node || !node->next || !node->next->next) return node;
         
