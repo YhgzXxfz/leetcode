@@ -1,7 +1,9 @@
 class Solution {
 public:
     bool search(vector<int>& nums, int target) {
-        int len = nums.size(), left = 0, right = len-1;
+       	if (nums.empty()) return false;
+
+	int len = nums.size(), left = 0, right = len-1;
         while (left < right) {
             int mid = left+(right-left)/2;
             if (nums[mid] == target) return true;
