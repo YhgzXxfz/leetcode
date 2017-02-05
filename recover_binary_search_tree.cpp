@@ -9,8 +9,6 @@
  */
 class Solution {
 public:
-    TreeNode* first, *second, *last;
-    
     void recoverTree(TreeNode* root) {
         if (!root) return ;
         
@@ -18,7 +16,8 @@ public:
         dfs(root);
         if (first && second) swap(first->val, second->val);
     }
-    
+   
+private: 
     void dfs(TreeNode* root) {
         if (!root) return;
         
@@ -32,4 +31,6 @@ public:
         last = root;
         dfs(root->right);
     }
+
+    TreeNode* first, *second, *last;
 };
