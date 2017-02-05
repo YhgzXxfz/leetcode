@@ -8,14 +8,13 @@
  * };
  */
 class Solution {
-private:
-    long long cur_min;
 public:
     bool isValidBST(TreeNode* root) {
         cur_min = LLONG_MIN;
         return checkBST(root);
     }
     
+private:
     bool checkBST(TreeNode* node){
         if (!node) return true;
         
@@ -26,4 +25,6 @@ public:
         
         return checkBST(node->right);
     }
+    
+    long long cur_min;
 };
