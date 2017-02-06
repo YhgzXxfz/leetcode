@@ -15,7 +15,8 @@ public:
         reverse(result.begin(), result.end());
         return result;
     }
-    
+
+private:    
     void bfs(TreeNode* root, vector<vector<int>>& result, int level) {
         if (!root) return;
         
