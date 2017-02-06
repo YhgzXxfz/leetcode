@@ -19,6 +19,38 @@ class Solution {
 public:
     TreeNode* sortedListToBST(ListNode* head) {
         if (!head) return nullptr;
+        return dfs(head, nullptr);
+    }
+
+private:
+    TreeNode* dfs(ListNode* begin, ListNode* end) {
+        if (!begin || begin == end) return nullptr;
+        
+        if (begin->next == end) return new TreeNode(begin->val);
+        
+        auto mid = getMiddle(begin, end);
+        TreeNode* root = new TreeNode(mid->val);
+        root->left = dfs(begin, mid);
+        root->right = dfs(mid->next, end);
+        return root;
+    }
+    
+    ListNode* getMiddle(ListNode* begin, ListNode* end) {
+        auto slow = begin, fast = begin;
+        while (fast != end && fast->next != end) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
+    }
+};
+
+// anonymous function
+/*
+class Solution {
+public:
+    TreeNode* sortedListToBST(ListNode* head) {
+        if (!head) return nullptr;
         
         auto getMiddle = [](ListNode* begin, ListNode* end) {
             auto fast = begin, slow = begin;
@@ -43,3 +75,4 @@ public:
         return convert(head, nullptr);
     }
 };
+*/
