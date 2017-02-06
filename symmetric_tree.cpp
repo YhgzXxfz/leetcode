@@ -12,10 +12,10 @@ public:
     bool isSymmetric(TreeNode* root) {
         if (!root) return true;
         
-        auto left = root->left, right = root->right;
-        return isSymmetric(left, right);
+        return isSymmetric(root->left, root->right);
     }
     
+private:
     bool isSymmetric(TreeNode* p, TreeNode* q) {
         if (!p && !q) return true;
         if (p && !q) return false;
