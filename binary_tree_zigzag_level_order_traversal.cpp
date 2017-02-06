@@ -14,7 +14,8 @@ public:
         bfs(root, result, 1, true);
         return result;
     }
-    
+
+private:    
     void bfs(TreeNode* root, vector<vector<int>>& result, int level, bool lToR) {
         if (!root) return;
         
