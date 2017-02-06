@@ -13,7 +13,8 @@ public:
         int height;
         return dfs(root, height);
     }
-    
+
+private:    
     bool dfs(TreeNode* root, int & height) {
         if (!root) {
             height = 0;
