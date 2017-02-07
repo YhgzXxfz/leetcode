@@ -16,7 +16,8 @@ public:
         
         return merge(left, right);
     }
-    
+
+private:    
     ListNode* cutMiddle(ListNode* head) {
         if (!head) return head;
         auto fast = head, slow = head;
