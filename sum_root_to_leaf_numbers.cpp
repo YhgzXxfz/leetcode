@@ -14,7 +14,8 @@ public:
         compute(root, sum, num);
         return sum;
     }
-    
+
+private:    
     void compute(TreeNode* root, int& sum, int num) {
         if (!root) return ;
         num = num*10 + root->val;
