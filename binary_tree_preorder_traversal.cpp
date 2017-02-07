@@ -14,7 +14,8 @@ public:
         dfs(root, result);
         return result;
     }
-    
+
+private:    
     void dfs(TreeNode* node, vector<int>& result) {
         if (!node) return;
         result.push_back(node->val);
