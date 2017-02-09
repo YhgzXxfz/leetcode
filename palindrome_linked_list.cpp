@@ -22,7 +22,8 @@ public:
         }
         return true;
     }
-    
+
+private:    
     ListNode* getMiddle(ListNode* head) {
         if (!head || !head->next) return head;
         auto fast = head, slow = head;
