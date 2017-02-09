@@ -11,19 +11,20 @@ class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) {
         int count = 0, result = 0;
-        solve(root, count, result, k);
+        dfs(root, count, result, k);
         return result;
     }
     
-    void solve(TreeNode* node, int& count, int& result, int k) {
+private:
+    void dfs(TreeNode* node, int& count, int& result, int k) {
         if (!node) return;
         
-        solve(node->left, count, result, k);
+        dfs(node->left, count, result, k);
         if (++count == k) {
             result = node->val;
             return;
         }
         
-        solve(node->right, count, result, k);
+        dfs(node->right, count, result, k);
     }
 };
