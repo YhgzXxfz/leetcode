@@ -1,3 +1,4 @@
+// topological sort
 class Solution {
 public:
     bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
@@ -30,8 +31,12 @@ public:
         
         return true;
         */
-        
-        // 2
+    }
+};
+
+// 2 check if a cycle exists
+class Solution { 
+    bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
         vector<unordered_set<int>> graph(numCourses);
         for (auto pre : prerequisites) {
             graph[pre.second].insert(pre.first);
@@ -44,6 +49,7 @@ public:
         return true;
     }
     
+private:
     bool dfs(vector<unordered_set<int>>& graph, vector<bool>& onpath, int b, vector<bool>& visited) {
         if (visited[b]) return false;
         onpath[b] = visited[b] = true;
