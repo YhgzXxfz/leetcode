@@ -1,16 +1,15 @@
 class Solution {
 public:
     string removeDuplicateLetters(string s) {
-        vector<int> cand(256, 0);
-        vector<bool> visited(256, false);
+        vector<int> mp(256, 0), visited(256, 0);
         for (char c : s)
-            cand[c]++;
+            mp[c]++;
             
         string result = "0";
         for (char c : s) {
-            cand[c]--;
+            mp[c]--;
             if (visited[c]) continue;
-            while (c < result.back() && cand[result.back()]) {
+            while (c < result.back() && mp[result.back()]) {
                 visited[result.back()] = false;
                 result.pop_back();
             }
