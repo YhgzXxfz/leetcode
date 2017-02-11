@@ -15,7 +15,8 @@ public:
         dfs(root, result, path);
         return result;
     }
-    
+
+private:    
     void dfs(TreeNode* root, vector<string>& result, string path) {
         if (!root) return;
         
@@ -25,6 +26,5 @@ public:
         }
         if (root->left) dfs(root->left, result, path+ v + "->");
         if (root->right) dfs(root->right, result, path+ v + "->");
-        
     }
 };
