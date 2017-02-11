@@ -12,7 +12,7 @@ public:
     int countUnivalSubtrees(TreeNode* root) {
         if (!root) return 0;
         
-        int count;
+        int count = 0;
         helper(root, count);
         return count;
     }
