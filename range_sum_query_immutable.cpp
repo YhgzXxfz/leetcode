@@ -1,6 +1,6 @@
 class NumArray {
 public:
-    NumArray(vector<int> &nums) {
+    NumArray(vector<int> nums) {
         int len = nums.size();
         data.resize(len+1);
         for (int i = 1; i <= len; ++i) {
