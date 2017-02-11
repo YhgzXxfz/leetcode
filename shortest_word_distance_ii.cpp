@@ -1,11 +1,11 @@
 class WordDistance {
 public:
-    WordDistance(vector<string>& words) {
+    WordDistance(vector<string> words) {
         for (int i = 0; i < words.size(); ++i) {
-            mp[words[i]].emplace_back(i);
+            mp[words[i]].push_back(i);
         }
     }
-
+    
     int shortest(string word1, string word2) {
         auto indexes1 = mp[word1], indexes2 = mp[word2];
         int min_dist = INT_MAX;
@@ -22,8 +22,8 @@ private:
     unordered_map<string, vector<int>> mp;
 };
 
-
-// Your WordDistance object will be instantiated and called as such:
-// WordDistance wordDistance(words);
-// wordDistance.shortest("word1", "word2");
-// wordDistance.shortest("anotherWord1", "anotherWord2");
+/**
+ * Your WordDistance object will be instantiated and called as such:
+ * WordDistance obj = new WordDistance(words);
+ * int param_1 = obj.shortest(word1,word2);
+ */
