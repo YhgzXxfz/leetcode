@@ -1,3 +1,4 @@
+// topological sort
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites) {
@@ -34,16 +35,19 @@ public:
             }
         }
         return result;
-        */
-        
-        // 2
-        vector<unordered_set<int>> graph (numCourses);
+    }
+};
+  
+// 2 check if a cycle exists      
+class Solution {       
+    vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites) {
+	vector<unordered_set<int>> graph (numCourses);
         for (auto pre : prerequisites) {
             graph[pre.second].insert(pre.first);
         }
         
         vector<int> result;
-        vector<bool> onpath(numCourses, false), visited(numCourses, false);
+        vector<int> onpath(numCourses, 0), visited(numCourses, 0);
         
         for (int i = 0; i < numCourses; i++) {
             if (!visited[i] && dfs(graph, i, onpath, visited, result)) return {};
@@ -52,13 +56,15 @@ public:
         return result;
     }
     
-    bool dfs(vector<unordered_set<int>>& graph, int node, vector<bool>& onpath, vector<bool>& visited, vector<int>& result) { 
+private:
+    bool dfs(vector<unordered_set<int>>& graph, int node, vector<int>& onpath, vector<int>& visited, vector<int>& result) { 
         if (visited[node]) return false;
-        onpath[node] = visited[node] = true; 
+        onpath[node] = visited[node] = 1; 
         for (int neighbor : graph[node]) {
             if (onpath[neighbor] || dfs(graph, neighbor, onpath, visited, result)) return true;
         }
         result.push_back(node);
-        return onpath[node] = false;
+        onpath[node] = 0;
+	return false;
     }
 };
