@@ -10,13 +10,16 @@ public:
 
 private:
     vector<string> route;
-    unordered_map<string, multiset<string>> targets; // duplicates allowed, lexicographical order needed, so multiset
-    
+
+    unordered_map<string, multiset<string>> targets;
+	// duplicates allowed, lexicographical order needed, so multiset
+	// just take the first feasible itinerary    
+
     void visit(string airport) {
         while (!targets[airport].empty()) {
-            string next = *targets[airport].begin();
-            targets[airport].erase(targets[airport].begin());
-            visit(next);
+            auto next = targets[airport].begin();
+            targets[airport].erase(next);
+            visit(*next);
         }
         route.push_back(airport);
     }
