@@ -16,7 +16,7 @@ public:
 
 private:
     int findFirstDiff(int n) {
-        for (int i = 0; i < 32; ++i) {
+        for (int i = 31; i >= 0; --i) {
             if ((n>>i) & 1) return i;
         }
         return 0;
