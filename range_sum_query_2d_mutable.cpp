@@ -1,6 +1,6 @@
 class NumMatrix {
 public:
-    NumMatrix(vector<vector<int>> &matrix) {
+    NumMatrix(vector<vector<int>> matrix) {
         mx = matrix;
         int m = matrix.size();
         int n = m == 0 ? 0 : matrix[0].size();
