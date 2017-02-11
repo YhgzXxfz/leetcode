@@ -1,8 +1,7 @@
+// 1 dp
 class Solution {
 public:
     int numSquares(int n) {
-        // 1 dp
-        /*
         if (n <= 0) return 0;
         
         vector<int> dp(n+1, INT_MAX);
@@ -13,10 +12,14 @@ public:
             }
         }
         return dp[n];
-        */
-        
-        // 2 math return 4 if and only if n = 4^k * (8m+7)
-        if (isSquare(n)) return 1;
+    }
+};
+ 
+// 2 math return 4 if and only if n = 4^k * (8m+7)
+class Solution {
+public:
+    int numSquare(int n) {
+	if (isSquare(n)) return 1;
         
         while ((n&3) == 0) {
             n >>= 2;
