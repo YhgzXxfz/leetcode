@@ -1,7 +1,11 @@
 class Solution {
 public:
     int maxKilledEnemies(vector<vector<char>>& grid) {
-        int m = grid.size(), n = m == 0 ? 0 : grid[0].size();
+	if (grid.empty()) return 0;
+
+        int m = grid.size(), n = grid[0].size();
+	if (n == 0) return 0;
+
         int max_kill = 0, row_hits, col_hits[n];
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
