@@ -7,9 +7,9 @@ public:
         sort(points.begin(), points.end(), comp);
         
         int count = 0, arrow = INT_MIN;
-        for (int i = 0; i < points.size(); ++i) {
-            if (arrow != INT_MIN && points[i].first <= arrow) continue;
-            arrow = points[i].second;
+        for (auto point : points) {
+            if (arrow != INT_MIN && point.first <= arrow) continue;
+            arrow = point.second;
             count++;
         }
         return count;
