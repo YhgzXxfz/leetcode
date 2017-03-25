@@ -1,21 +1,21 @@
 class Solution {
 public:
-    vector<vector<string>> findLadders(string beginWord, string endWord, unordered_set<string> &wordList) {
+    vector<vector<string>> findLadders(string beginWord, string endWord, vector<string> &wordList) {
         vector<vector<string>> result;
         vector<string> path(1, beginWord);
         if (beginWord == endWord) {
             result.emplace_back(path);
             return result;
         }
-        
-        unordered_set<string> words1, words2;
+        if (find(wordList.begin(), wordList.end(), endWord) == wordList.end()) return result;
+
+        unordered_set<string> words1, words2, dict(wordList.begin(), wordList.end());
         words1.insert(beginWord);
         words2.insert(endWord);
         
         unordered_map<string, vector<string>> mp;
         bool words1_is_begin = false;
-        
-        if (dfs(words1, words2, wordList, mp, words1_is_begin)) 
+        if (dfs(words1, words2, dict, mp, words1_is_begin)) 
             getPath(beginWord, endWord, mp, path, result);
             
         return result;
