@@ -24,13 +24,13 @@ private:
 		for (auto word : words1) dict.erase(word);
 		for (auto word : words2) dict.erase(word);
  
-		unordered_set<string> intermidiate;
-		int has_shortcut = constructIntermidiate(intermidiate, words1, words2, dict);
+		unordered_set<string> intermediate;
+		int has_shortcut = constructIntermediate(intermediate, words1, words2, dict);
 		if (has_shortcut) return level+1;
 		return dfs(words2, words3, dict, level+1);
     	}
 
-	int constructIntermidiate(unordered_set<string>& intermidiate,
+	int constructIntermediate(unordered_set<string>& intermediate,
 				unordered_set<string>& words1,
 				unordered_set<string>& words2,
 				unordered_set<string>& dict) {
@@ -41,7 +41,7 @@ private:
 				for (*ch = 'a'; *ch <= 'z'; ++(*ch)) {
 					if (words2.count(word)) return 1;
 					else if (dict.count(word)) {
-						intermidiate.insert(word);
+						intermediate.insert(word);
 					}
 				}
 				*ch = tmp;
