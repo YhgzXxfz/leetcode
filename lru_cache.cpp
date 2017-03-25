@@ -2,8 +2,7 @@ class LRUCache {
 public:
     LRUCache(int capacity):_capacity(capacity){}
 
-    int get(int key)
-    {
+    int get(int key) {
         auto it = cache.find(key);
         if (it == cache.end()) return -1;
         
@@ -12,15 +11,12 @@ public:
         return it->second.first;
     }
     
-    void set(int key, int value)
-    {
+    void put(int key, int value) {
         auto it = cache.find(key);
         if (it != cache.end()) hit(it);
         
-        else
-        {
-            if (cache.size() >= _capacity)
-            {
+        else {
+            if (cache.size() >= _capacity) {
                 cache.erase(used.back());
                 used.pop_back();
             }
@@ -36,8 +32,7 @@ private:
     unordered_map<int, pair<int, list<int>::iterator>> cache;
     
     
-    void hit(unordered_map<int, pair<int, list<int>::iterator>>::iterator it)
-    {
+    void hit(unordered_map<int, pair<int, list<int>::iterator>>::iterator it) {
         int key = it->first;
         used.erase(it->second.second);
         used.push_front(key);
