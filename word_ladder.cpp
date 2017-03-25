@@ -1,14 +1,15 @@
 class Solution {
 public:
-    int ladderLength(string beginWord, string endWord, unordered_set<string>& wordList) {
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
         if (beginWord == endWord) return 1;
+	if (find(wordList.begin(), wordList.end(), endWord) == wordList.end()) return 0;
         
-	unordered_set<string> words1, words2;
+	unordered_set<string> words1, words2, dict(wordList.begin(), wordList.end());
         words1.insert(beginWord);
         words2.insert(endWord);
-        wordList.erase(beginWord);
-        wordList.erase(endWord);
-        return dfs(words1, words2, wordList, 1);
+        dict.erase(beginWord);
+        dict.erase(endWord);
+        return dfs(words1, words2, dict, 1);
     }
     
 private:
