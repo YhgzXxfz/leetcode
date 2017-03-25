@@ -3,7 +3,7 @@ public:
     int ladderLength(string beginWord, string endWord, unordered_set<string>& wordList) {
         if (beginWord == endWord) return 1;
         
-        unordered_set<string> words1, words2;
+	unordered_set<string> words1, words2;
         words1.insert(beginWord);
         words2.insert(endWord);
         wordList.erase(beginWord);
@@ -11,6 +11,7 @@ public:
         return dfs(words1, words2, wordList, 1);
     }
     
+private:
     int dfs(unordered_set<string>& words1, unordered_set<string>& words2, 
         unordered_set<string>& dict, int level) {
         if (words1.empty()) return 0;
