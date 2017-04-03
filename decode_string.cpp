@@ -1,3 +1,44 @@
+// recursive
+class Solution {
+public:
+	string decodeString(string s) {
+		int i = 0;
+		return decodeString(s, i);
+	}
+
+private:
+	string decodeString(string s, int& i) {
+		string result;
+		int len = s.size();
+		while (i < len && s[i] != ']') {
+			if (!isdigit(s[i])) {
+				result += s[i++];
+			} else {
+				int num = 0;
+				while (i < len && isdigit(s[i])) {
+					num = num*10 + s[i++]-'0';
+				}
+
+				++i;
+				string nested = decodeString(s, i);
+				++i;
+
+				while (num-- > 0) {
+					result += nested;
+				}
+			}
+		}
+	}
+};
+
+
+
+
+
+
+
+
+// iterative
 class Solution {
 public:
     string decodeString(string s) {
