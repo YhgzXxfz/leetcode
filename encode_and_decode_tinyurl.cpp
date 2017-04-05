@@ -1,3 +1,43 @@
+class Solution {
+public:
+    string getRand() {
+        string result;
+        for (int i = 0; i < 7; ++i) {
+            result += base[rand()%62];
+        }
+        return result;
+    }
+    
+    // Encodes a URL to a shortened URL.
+    string encode(string longUrl) {
+        string key;
+        do {
+            key = getRand();
+        } while (mp.find(key) != mp.end());
+        mp[key] = longUrl;
+        return prefix + key;
+    }
+
+    // Decodes a shortened URL to its original URL.
+    string decode(string shortUrl) {
+        return mp[shortUrl.substr(prefix.size())];
+    }
+    
+private:
+    unordered_map<string, string> mp;
+    const string prefix = "http://tinyurl.com/";
+    const string base = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+};
+
+// Your Solution object will be instantiated and called as such:
+// Solution solution;
+// solution.decode(solution.encode(url));
+
+
+
+
+
+
 #include <chrono>
 class Solution {
 public:
