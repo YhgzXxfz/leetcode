@@ -1,6 +1,34 @@
 class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& findNums, vector<int>& nums) {
+        unordered_map<int, int> mp;
+        generateNextGreaterElements(nums, mp);
+        
+        vector<int> result;
+        for (auto num : findNums) {
+            result.emplace_back(mp.count(num) ? mp[num] : -1);
+        }
+        return result;
+    }
+
+private:
+    void generateNextGreaterElements(vector<int>& nums, unordered_map<int, int>& mp) {
+        stack<int> s;
+        for (auto num : nums) {
+            while (!s.empty() && s.top() < num) {
+                mp[s.top()] = num;
+                s.pop();
+            }
+            s.push(num);
+        }
+    }
+};
+
+
+// O(N^2)
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& findNums, vector<int>& nums) {
         int len = findNums.size();
         vector<int> result;
         
