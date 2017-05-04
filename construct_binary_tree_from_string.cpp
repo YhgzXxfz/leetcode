@@ -7,6 +7,7 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+// 1
 class Solution {
 public:
     TreeNode* str2tree(string s) {
@@ -34,5 +35,35 @@ private:
             if (left == right) break;
         }
         return i;
+    }
+};
+
+
+// 2
+class Solution {
+public:
+    TreeNode* str2tree(string s) {
+        int i = 0;
+        return s.size() == 0 ? nullptr : build(s, i);
+    }
+
+private:
+    TreeNode* build(string& s, int& i) {
+        int start = i;
+        if (s[i] == '-') ++i;
+        while (isdigit(s[i])) ++i;
+        
+        auto root = new TreeNode(stoi(s.substr(start, i-start)));
+        if (s[i] == '(') {
+            root->left = build(s, ++i);
+            ++i;
+        }
+        
+        if (s[i] == '(') {
+            root->right = build(s, ++i);
+            ++i;
+        }
+        
+        return root;
     }
 };
