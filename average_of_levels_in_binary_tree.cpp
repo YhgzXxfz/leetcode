@@ -35,3 +35,29 @@ private:
         dfs(root->right, nodes, level+1);
     }
 };
+
+
+
+class Solution {
+public:
+    vector<double> averageOfLevels(TreeNode* root) {
+        vector<pair<double,int>> aves;
+        dfs(root, aves, 0);
+        
+        vector<double> result;
+        for (const auto& entry : aves) result.push_back(entry.first);
+        return result;
+    }
+
+private:
+    void dfs(TreeNode* root, vector<pair<double, int>>& aves, int level) {
+        if (!root) return ;
+        
+        if (level >= aves.size()) aves.push_back(make_pair(0,0));
+        aves[level].second++;
+        aves[level].first += (root->val - aves[level].first) / aves[level].second;
+        
+        dfs(root->left, aves, level+1);
+        dfs(root->right, aves, level+1);
+    }
+};
