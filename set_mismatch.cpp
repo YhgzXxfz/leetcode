@@ -1,3 +1,4 @@
+// set + map
 class Solution {
 public:
     vector<int> findErrorNums(vector<int>& nums) {
@@ -23,5 +24,25 @@ private:
 			if (entry.second > 1) dup = entry.first;
 		}
         return dup;
+    }
+};
+
+
+// index acceleration
+class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+        int i = 0, len = nums.size();
+		while (i < len) {
+			if (nums[i] != nums[nums[i]-1]) swap(nums[i], nums[nums[i]-1]);
+			else i++;
+		}
+
+		for (int i = 0; i < len; ++i) {
+			if (nums[i] != i+1) {
+				return vector<int>{nums[i], i+1};
+			}
+		}
+		return {0,0};
     }
 };
