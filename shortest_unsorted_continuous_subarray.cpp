@@ -44,3 +44,34 @@ public:
 	}
 };
 
+// 3 four passes
+class Solution {
+public:
+    int findUnsortedSubarray(vector<int>& nums) {
+        int len = nums.size();
+		if (len <= 1) return 0;
+
+		int min_num = INT_MAX, max_num = INT_MIN;
+		bool flag = false;
+		for (int i = 1; i < len; ++i) {
+			if (nums[i-1] > nums[i]) flag = true;
+			if (flag) min_num = min(min_num, nums[i]);
+		}
+
+        flag = false;
+		for (int i = len-2; i >= 0; --i) {
+			if (nums[i] > nums[i+1]) flag = true;
+			if (flag) max_num = max(max_num, nums[i]);
+		}
+
+		int left, right;
+		for (left = 0; left < len; ++left) {
+			if (min_num < nums[left]) break;
+		}
+
+		for (right = len-1; right >= 0; --right) {
+			if (max_num > nums[right]) break;
+		}
+		return right > left ? right-left+1 : 0;
+    }
+};
