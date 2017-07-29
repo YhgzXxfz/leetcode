@@ -1,3 +1,4 @@
+// dp
 class Solution {
 public:
     int findLongestChain(vector<vector<int>>& pairs) {
@@ -13,5 +14,25 @@ public:
             }
         }
         return *max_element(dp.begin(), dp.end());
+    }
+};
+
+// greedy
+class Solution {
+public:
+    int findLongestChain(vector<vector<int>>& pairs) {
+        sort(pairs.begin(), pairs.end(), [&](vector<int>& p1, vector<int>& p2) {
+			return p1[1] < p2[1];
+		});
+
+		int count = 0;
+		auto curr = pairs[0];
+		for (int i = 0; i < pairs.size(); ++i) {
+			if (i == 0 || pairs[i][0] > curr[1]) {
+				count++;
+				curr = pairs[i];
+			}
+		}
+		return count;
     }
 };
