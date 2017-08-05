@@ -1,3 +1,4 @@
+// dfs + cache
 class Solution {
 public:
     int maxVacationDays(vector<vector<int>>& flights, vector<vector<int>>& days) {
@@ -24,4 +25,27 @@ private:
     }
     
     int N, K;
+};
+
+
+// dp 2D
+class Solution {
+public:
+    int maxVacationDays(vector<vector<int>>& flights, vector<vector<int>>& days) {
+	if (days.empty()) return 0;
+
+        int N = days.size(), K = days[0].size();
+        int dp[N][K+1] = {};
+        for (int week = K-1; week >= 0; --week) {
+            for (int city = 0; city < N; ++city) {
+                dp[city][week] = days[city][week] + dp[city][week+1];
+                for (int i = 0; i < N; ++i) {
+                    if (flights[city][i] == 1) {
+                        dp[city][week] = max(dp[city][week], days[i][week] + dp[i][week+1]);
+                    }
+                }
+            }
+        }
+        return dp[0][0];
+    }
 };
