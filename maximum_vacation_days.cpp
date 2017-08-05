@@ -49,3 +49,26 @@ public:
         return dp[0][0];
     }
 };
+
+
+// dp 1D
+class Solution {
+public:
+    int maxVacationDays(vector<vector<int>>& flights, vector<vector<int>>& days) {
+        int N = days.size(), K = days[0].size();
+        vector<int> dp(N,0), temp(N,0);
+        for (int week = K-1; week >= 0; --week) {
+            temp = vector<int>(N,0);
+            for (int city = 0; city < N; ++city) {
+                temp[city] = days[city][week] + dp[city];
+                for (int i = 0; i < N; ++i) {
+                    if (flights[city][i] == 1) {
+                        temp[city] = max(temp[city], days[i][week] + dp[i]);
+                    }
+                }
+            }
+            dp = temp;
+        }
+        return dp[0];
+    }
+};
