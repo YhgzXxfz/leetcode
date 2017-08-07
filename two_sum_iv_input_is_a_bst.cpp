@@ -7,6 +7,7 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
 // dfs
 class Solution {
 public:
@@ -31,5 +32,24 @@ private:
         dfs(root->left, nums);
         nums.push_back(root->val);
         dfs(root->right, nums);
+    }
+};
+
+
+// set
+class Solution {
+public:
+    bool findTarget(TreeNode* root, int k) {
+        unordered_set<int> st;
+        return dfs(st, k, root);
+    }
+
+private:
+    bool dfs(unordered_set<int>& st, int k, TreeNode* root) {
+        if (!root) return false;
+        
+        if (st.count(k - root->val)) return true;
+        st.insert(root->val);
+        return dfs(st, k, root->left) || dfs(st, k, root->right);
     }
 };
