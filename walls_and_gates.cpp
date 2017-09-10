@@ -11,27 +11,23 @@ public:
             }
         }
         
+	vector<vector<int>> dirs = {{-1,0}, {1,0}, {0,1}, {0,-1}};
         int depth = 1;
         while (!q.empty()) {
             int size = q.size(); // necessary for the queue size might change in the loop
             for (int k = 0; k < size; ++k) {
-                int i = q.front().first, j = q.front().second;
+                auto curr = q.front();
                 q.pop();
-                bfs(rooms, q, i+1, j, m, n, depth);
-                bfs(rooms, q, i-1, j, m, n, depth);
-                bfs(rooms, q, i, j+1, m, n, depth);
-                bfs(rooms, q, i, j-1, m, n, depth);
+		for (auto dir : dirs) {
+			int x = curr.first+dir[0], y = curr.second+dir[1];
+			if (x >= 0 && x < m && y >= 0 && y < n && romms[x][y] > depth) {
+				q.push(make_pair(x,y));
+				rooms[x][y] = depth;
+			}
+		}
             }
             
-            depth++;
-        }
-    }
-
-private:
-    void bfs(vector<vector<int>>& rooms, queue<pair<int, int>>& q, int i, int j, int m, int n, int depth) {
-        if (i >= 0 && i < m && j >= 0 && j < n && rooms[i][j] > depth) {
-            q.push(make_pair(i,j));
-            rooms[i][j] = depth;
+            ++depth;
         }
     }
 };
