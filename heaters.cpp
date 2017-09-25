@@ -8,7 +8,7 @@ public:
             auto larger = lower_bound(heaters.begin(), heaters.end(), house);
             int curr = INT_MAX;
             if (larger != heaters.end()) curr = *larger-house;
-            if (larger != heaters.begin()) curr = min(curr, house- *(larger-1));
+            if (larger != heaters.begin()) curr = min(curr, house- *prev(larger));
             min_radius = max(min_radius, curr);
         }
         return min_radius;
