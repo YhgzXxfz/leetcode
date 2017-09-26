@@ -2,29 +2,21 @@
 class Solution {
 public:
     bool PredictTheWinner(vector<int>& nums) {
-        if (nums.size() &1 == 0) return true;
-        
-        int len = nums.size();
-        vector<vector<int>> dp(len, vector<int>(len, -1));
-        int curr = utill(nums, dp, 0, len-1);
-        return 2*curr >= accumulate(nums.begin(), nums.end(), 0);
-    }
-
-private:
-    int utill(vector<int>& nums, vector<vector<int>>& dp, int i, int j) {
-        if (i > j) return 0;
-        if (dp[i][j] != -1) return dp[i][j];
-        
-        int a = nums[i] + min(utill(nums, dp, i+1, j-1), utill(nums, dp, i+2, j));
-        int b = nums[j] + min(utill(nums, dp, i, j-2), utill(nums, dp, i+1, j-1));
-        dp[i][j] = max(a,b);
-        
-        return dp[i][j];
+    	int len = nums.size();
+	vector<vector<int>> dp(len+1, vector<int>(len,0));
+	for (int i = len; i >= 0; --i) {
+		for (int j = i+1; j < len; ++j) {
+			int take_begin = nums[i] - dp[i+1][j];
+			int take_end = nums[j] - dp[i][j-1];
+			dp[i][j] = max(take_begin, take_end);
+		}
+	}
+	return dp[0][len-1] >= 0;
     }
 };
 
+
 // dfs + cache
-/*
 class Solution {
 public:
     bool PredictTheWinner(vector<int>& nums) {
@@ -41,10 +33,8 @@ private:
         return cache[index];
     }
 };
-*/
 
 // dfs
-/*
 class Solution {
 public:
     bool PredictTheWinner(vector<int>& nums) {
@@ -56,4 +46,3 @@ private:
         return begin == end ? nums[begin] : max(nums[end]-dfs(nums, begin, end-1), nums[begin]-dfs(nums, begin+1, end));
     }
 };
-*/
