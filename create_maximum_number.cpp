@@ -2,6 +2,44 @@ class Solution {
 public:
     vector<int> maxNumber(vector<int>& nums1, vector<int>& nums2, int k) {
         int m = nums1.size(), n = nums2.size();
+        vector<int> result;
+        for (int i = max(k-n, 0); i <= min(k, m); ++i) {
+            result = max(result, merge(maxArray(nums1, i), maxArray(nums2, k-i)));
+        }
+        return result;
+    }
+
+private:
+    vector<int> maxArray(vector<int> nums, int k) {
+        int drop = nums.size()-k;
+        vector<int> out;
+        for (int num : nums) {
+            while (drop > 0 && !out.empty() && out.back() < num) {
+                out.pop_back();
+                drop--;
+            }
+            out.push_back(num);
+        }
+        out.resize(k);
+        return out;
+    }
+
+    vector<int> merge(vector<int> nums1, vector<int> nums2) {
+        vector<int> out;
+        while (nums1.size() > 0 || nums2.size() > 0) {
+            vector<int>& now = nums1 > nums2 ? nums1 : nums2;
+            out.push_back(now[0]);
+            now.erase(now.begin());
+        }
+        return out;
+    }
+};
+
+
+class Solution {
+public:
+    vector<int> maxNumber(vector<int>& nums1, vector<int>& nums2, int k) {
+        int m = nums1.size(), n = nums2.size();
         vector<int> result(k, 0);
         for (int i = max(0, k-n); i <= m && i <= k; ++i) {
             vector<int> candidate = merge(maxArray(nums1, i), maxArray(nums2, k-i), k);
