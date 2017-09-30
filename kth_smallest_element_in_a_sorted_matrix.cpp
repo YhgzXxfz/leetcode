@@ -14,7 +14,7 @@ public:
         return pq.top();
         */
         
-        // Binary Search, O(log(N^2))
+        // Binary Search, O(log(N^2) * NlogN)
         int m = matrix.size();
         int left = matrix[0][0], right = matrix[m-1][m-1];
         while (left < right) {
