@@ -1,6 +1,23 @@
 class Solution {
 public:
     string findContestMatch(int n) {
+        vector<string> vec(n);
+        for (int i = 0; i < n; ++i) vec[i] = to_string(i+1);
+        
+        while (n > 1) {
+            for (int i = 0; i < n/2; ++i) {
+                vec[i] = "(" + vec[i] + "," + vec[n-1-i] + ")";
+            }
+            n /= 2;
+        }
+        return vec[0];
+    }
+};
+
+
+class Solution {
+public:
+    string findContestMatch(int n) {
         int k = log(n)/log(2), num = 1, sum;
         string result = "1";
         for (int i = 1; i <= k; ++i) {
