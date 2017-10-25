@@ -17,6 +17,20 @@ public:
     }
 };
 
+class Solution { 
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        auto curr = root;
+        while (true) {
+            if (p->val < curr->val && q->val < curr->val)
+                curr = curr->left;
+            else if (p->val > curr->val && q->val > curr->val)
+                curr = curr->right;
+            else return curr; 
+        }
+    }
+};
+
 
 class Solution {
 public:
