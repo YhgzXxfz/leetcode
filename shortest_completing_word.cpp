@@ -15,7 +15,7 @@ public:
                 if (temp[c-'a'] == 0) continue;
                 
                 temp[c-'a']--;
-                if (accumulate(temp.begin(), temp.end(), 0) == 0) {
+                if (accumulate(temp.begin(), temp.end(), 0) == 0) { // or count(temp.begin(), temp.end(), 0) == 26
                     if (result.empty() || word.size() < result.size()) result = word;
                 }
             }
