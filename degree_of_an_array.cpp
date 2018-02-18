@@ -11,6 +11,7 @@ public:
         for (auto entry : mp) {
             if (max_freq < entry.second) max_freq = entry.second;
         }
+	if (max_freq == 1) return 1;
         
         queue<int> q;
         for (auto entry : mp) {
