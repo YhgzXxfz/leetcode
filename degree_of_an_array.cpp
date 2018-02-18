@@ -7,12 +7,9 @@ public:
             ++mp[num];
         }
         
-        int elem, max_freq = 0;
+        int max_freq = 0;
         for (auto entry : mp) {
-            if (max_freq < entry.second) {
-                max_freq = entry.second;
-                elem = entry.first;
-            }
+            if (max_freq < entry.second) max_freq = entry.second;
         }
         
         queue<int> q;
