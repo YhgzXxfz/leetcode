@@ -1,3 +1,20 @@
+// O(R-L), O(1)
+class Solution {
+public:
+    int countPrimeSetBits(int L, int R) {
+        int result = 0;
+        vector<int> primes = {0,0,1,1,0,1,0,1,0,0,0,1,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0,0,0,1,0,1};
+        for (int i = L; i <= R; ++i) {
+            bitset<32> bits(i);
+            if (primes[bits.count()]) ++result;
+        }
+        return result;
+    }
+};
+
+
+
+// O(R-L), O(1)
 class Solution {
 public:
     int countPrimeSetBits(int L, int R) {
